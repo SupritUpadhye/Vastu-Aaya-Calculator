@@ -82,10 +82,6 @@
                     <a class="navbar-brand heading" href="index.html">
                         <h1 class="text-center px-3 py-2">SIDHANT ASTRO</h1>
                     </a>
-                    <div class="d-flex justify-content-evenly fw-bold">
-                        <p>Date : <span id="date"></span></p>
-                        <p>Time : <span id="time"></span></p>
-                    </div>
                 </div>
                 <div class="col-md-6">
                     <p class="d-block fw-bold fs-6 mb-0">Pt. Shri Arun Upadhye</p>
@@ -93,8 +89,8 @@
                     <a class="d-block" href="">email : sidhantastro19@gmail.com</a>
                 </div>
             </div>
-            <div class="row d-flex justify-content-center ">
-                <div class="col-lg-3 input-data border p-4">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-3 input-data p-4">
                     <form>
                         <div class="form-group mt-3">
                             <label for="exampleFormControlInput1">घर मालकाचे नांव :</label>
@@ -131,7 +127,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-9 ">
+                <div class="col-lg-9">
                     <table class="table table-bordered main-table">
                         <thead>
                             <tr>
@@ -211,6 +207,15 @@
                             </tr>
                         </tbody>
                     </table>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="hero my-3 p-4 d-none no-page-break" id="grah-melan-chart">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-9">
                     <table class="table table-bordered mt-4 table-2">
                         <thead class="table-dark">
                             <tr>
@@ -269,13 +274,13 @@
                         </tbody>    
                     </table>
                     <div class="d-flex justify-content-center">
-                        <button id="download-pdf" class="btn btn-secondary">Download as PDF</button>
+                        <button id="downloadBtn" class="btn btn-primary">Download PDF</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="hero my-5 p-3 d-none" id="ghatit-info">
+        <section class="hero my-3 p-3 no-page-break d-none" id="ghatit-info">
             <div class="container mt-5">
                 <h2 class="mb-4 text-center fw-bold sec2-heading">घटीत मेलन संबंधी खुलासा</h2>
                 <table class="table table-bordered table-striped table-3">
@@ -328,5 +333,4 @@
     <script src="main.js"></script>
     <script src="bootstrap.min.js"></script>
 </body>
-
 </html>

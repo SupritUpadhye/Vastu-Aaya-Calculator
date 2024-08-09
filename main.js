@@ -999,22 +999,22 @@ function grahNakshatra(vargNakshatra){
 
 function grahGhatitFal(clientTaraResult){
 
-    const filteredGrahNakshtra = grahNakshatraValue.match(/^[^\d\s\.\-]+/)[0];
-    console.log(filteredGrahNakshtra);
+    // const filteredGrahNakshtra = grahNakshatraValue.match(/^[^\d\s\.\-]+/)[0];
+    // console.log(filteredGrahNakshtra);
     
-    const filteredNakshtraname = nakshatraName.match(/^[^\d\s\.\-]+/)[0];
-    console.log(filteredNakshtraname);
+    // const filteredNakshtraname = nakshatraName.match(/^[^\d\s\.\-]+/)[0];
+    // console.log(filteredNakshtraname);
     
-    if (filteredGrahNakshtra == filteredNakshtraname) {
-        document.getElementById('nakshatra-fal').innerHTML = "अशुभ";
-        document.getElementById('nakshatra-fal').classList.remove('text-success');
-        document.getElementById('nakshatra-fal').classList.add('text-danger');
-    }
-    else{
-        document.getElementById('nakshatra-fal').innerHTML = "शुभ";
-        document.getElementById('nakshatra-fal').classList.remove('text-danger');
-        document.getElementById('nakshatra-fal').classList.add('text-success');
-    }
+    // if (filteredGrahNakshtra == filteredNakshtraname) {
+    //     document.getElementById('nakshatra-fal').innerHTML = "अशुभ";
+    //     document.getElementById('nakshatra-fal').classList.remove('text-success');
+    //     document.getElementById('nakshatra-fal').classList.add('text-danger');
+    // }
+    // else{
+    //     document.getElementById('nakshatra-fal').innerHTML = "शुभ";
+    //     document.getElementById('nakshatra-fal').classList.remove('text-danger');
+    //     document.getElementById('nakshatra-fal').classList.add('text-success');
+    // }
 
     let nadiVal = 0;
     let nadiFal = "अति शुभ";

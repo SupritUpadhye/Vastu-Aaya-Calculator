@@ -24,28 +24,32 @@ document.onkeydown = function(e) {
 // Loader animation
 document.addEventListener("DOMContentLoaded", function() {
     const loader = document.getElementById("loader");
-    const firstPageContent = document.getElementById("first-page-content");
-    const contentToPrint = document.getElementById("content-to-print");
-    const anotherContent = document.getElementById('ghatit-info');
+    
+    const content1 = document.getElementById("first-page-content");
+    const content2 = document.getElementById('content-to-print');
+    const content3 = document.getElementById('grah-melan-chart');
+    const content4 = document.getElementById('ghatit-info');
+
     const footer = document.getElementById("footer");
 
     function hideLoaderAndShowContent() {
         loader.classList.add("d-none"); // Hide the loader
-        firstPageContent.classList.remove("d-none"); // Show the main content
-        contentToPrint.classList.remove("d-none");
-        anotherContent.classList.remove("d-none");
+        content1.classList.remove("d-none"); // Show the main content
+        content2.classList.remove("d-none");
+        content3.classList.remove("d-none");
+        content4.classList.remove("d-none");
         footer.classList.remove("d-none");
 
         // Load the main background image after content is displayed
         const mainBgImage = new Image();
-        mainBgImage.src = 'images/vastushastra-bannner.jpg';
+        mainBgImage.src = 'images/vastushastra-bannner2.jpg';
         mainBgImage.onload = function() {
             document.body.classList.add('bg-loaded'); // Add the main background image
         };
     }
 
     function showLoaderForMinimumTime() {
-        const minimumLoaderTime = 2000; // 2 seconds
+        const minimumLoaderTime = 500; // 2 seconds
         const start = Date.now();
 
         window.addEventListener("load", function() {
@@ -57,9 +61,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Initially hide content and show loader
-    firstPageContent.classList.add("d-none");
-    contentToPrint.classList.add("d-none");
-    anotherContent.classList.add("d-none");
+    content1.classList.add("d-none");
+    content2.classList.add("d-none");
+    content3.classList.add("d-none");
+    content4.classList.add("d-none");
     footer.classList.add("d-none");
 
     showLoaderForMinimumTime();
@@ -999,23 +1004,25 @@ function grahNakshatra(vargNakshatra){
 
 function grahGhatitFal(clientTaraResult){
 
-    const filteredGrahNakshtra = grahNakshatraValue.match(new RegExp('^[^\\d\\s\\.\\-]+'))[0];
-    // console.log(filteredGrahNakshtra);
+    if (grahNakshatraValue && nakshatraName) {
+        const filteredGrahNakshtra = grahNakshatraValue.match(new RegExp('^[^\\d\\s\\.\\-]+'))[0];
+        console.log(filteredGrahNakshtra);
+        const filteredNakshtraname = nakshatraName.match(new RegExp('^[^\\d\\s\\.\\-]+'))[0];
+        console.log(filteredNakshtraname);
+        
 
-    const filteredNakshtraname = nakshatraName.match(new RegExp('^[^\\d\\s\\.\\-]+'))[0];
-    // console.log(filteredNakshtraname);
-
+        if (filteredGrahNakshtra == filteredNakshtraname) {
+            document.getElementById('nakshatra-fal').innerHTML = "अशुभ";
+            document.getElementById('nakshatra-fal').classList.remove('text-success');
+            document.getElementById('nakshatra-fal').classList.add('text-danger');
+        }
+        else{
+            document.getElementById('nakshatra-fal').innerHTML = "शुभ";
+            document.getElementById('nakshatra-fal').classList.remove('text-danger');
+            document.getElementById('nakshatra-fal').classList.add('text-success');
+        }
+    }
     
-    if (filteredGrahNakshtra == filteredNakshtraname) {
-        document.getElementById('nakshatra-fal').innerHTML = "अशुभ";
-        document.getElementById('nakshatra-fal').classList.remove('text-success');
-        document.getElementById('nakshatra-fal').classList.add('text-danger');
-    }
-    else{
-        document.getElementById('nakshatra-fal').innerHTML = "शुभ";
-        document.getElementById('nakshatra-fal').classList.remove('text-danger');
-        document.getElementById('nakshatra-fal').classList.add('text-success');
-    }
 
     let nadiVal = 0;
     let nadiFal = "अति शुभ";
@@ -1281,22 +1288,32 @@ grahGhatitFal()
 
 
 // convertting to pdf 
-document.getElementById('download-pdf').addEventListener('click', () => {
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
     const buttons = document.querySelectorAll('#download-pdf, #other-button');
     const info = document.querySelector('#creater-info');
-    const firstPageContent = document.querySelector('#first-page-content'); 
-    const contentToPrint = document.querySelector('#content-to-print');
+
+    const navbar = document.querySelector('#first-page-content'); 
+    const contentToPrint1 = document.querySelector('#content-to-print');
+    const contentToPrint2 = document.querySelector('#grah-melan-chart'); 
+    const contentToPrint3 = document.querySelector('#ghatit-info');
+    const footer = document.getElementById('footer');
 
     // Hide buttons
     buttons.forEach(button => button.classList.add('d-none'));
 
-    // Hide the first page content
-    if (firstPageContent) {
-        firstPageContent.style.display = 'none';
+    // Hide the first page content and footer
+    if (navbar) {
+        navbar.style.display = 'none';
+    }
+    if (footer) {
+        footer.style.display = 'none';
     }
 
     // Ensure the content to print is visible
-    contentToPrint.classList.remove('d-none');
+    contentToPrint1.classList.remove('d-none');
+    contentToPrint2.classList.remove('d-none');
+    contentToPrint3.classList.remove('d-none');
 
     // Display brand name and name information for PDF
     info.classList.remove('d-none');
@@ -1306,13 +1323,19 @@ document.getElementById('download-pdf').addEventListener('click', () => {
 
     // Restore the visibility after printing
     setTimeout(() => {
-        if (firstPageContent) {
-            firstPageContent.style.display = ''; 
+        if (navbar) {
+            navbar.style.display = ''; 
+        }
+        if (footer) {
+            footer.style.display = '';
         }
         info.classList.add('d-none');
         buttons.forEach(button => button.classList.remove('d-none'));
     }, 1000);
 });
+
+
+
 
 
 

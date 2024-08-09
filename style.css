@@ -177,33 +177,6 @@ footer{
     page-break-inside: avoid;
 }
 
-/* General print styles */
-@media print {
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    .container, .hero {
-        width: 100%;
-        page-break-inside: avoid; /* Prevents breaking inside the container */
-    }
-
-    #first-page-content {
-        display: none; /* Hide the first page content */
-    }
-
-    #content-to-print {
-        page-break-before: auto; /* Avoid page breaks before this section */
-        page-break-after: auto; /* Avoid page breaks after this section */
-        page-break-inside: avoid; /* Avoid page breaks inside this section */
-    }
-
-    /* Make sure the print preview does not include unnecessary margins */
-    @page {
-        margin: 0;
-    }
-}
 
 /* Loader animation */
 .loader-animation{
@@ -254,4 +227,58 @@ img{
 	}
 }
 
+
+/* download pdf  */
+
+
+@media print {
+    /* Hide everything except the content you want to print */
+    body * {
+        visibility: hidden;
+    }
+
+    #content-to-print * {
+        visibility: visible;
+
+    }
+    #grah-melan-chart  * {
+        visibility: visible;
+    }
+    #ghatit-info * {
+        visibility: visible;
+    }
+
+    #content-to-print{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    #grah-melan-chart{
+        position: absolute;
+        left: -10%;
+        top: 100%;
+    }
+    #ghatit-info{
+        position: absolute;
+        left: 0;
+        top: 200%;
+    }
+
+    /* Hide header, footer, and other elements */
+    #first-page-content,
+    #footer,
+    #download-pdf,
+    #other-button {
+        display: none;
+    }
+
+    /* Remove page numbers, date, and time */
+    @page {
+        margin: 0;
+    }
+    
+    button {
+        display: none !important;
+    }
+}
 

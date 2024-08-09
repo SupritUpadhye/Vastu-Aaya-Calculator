@@ -18,9 +18,25 @@ document.onkeydown = function(e) {
         return false; // Ctrl+U
     }
 }
+
+document.getElementById('share-button').addEventListener('click', async function() {
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: document.title,
+                text: 'Check out this website!',
+                url: window.location.href
+            });
+            console.log('Content shared successfully');
+        } catch (error) {
+            console.error('Error sharing content:', error);
+        }
+    } else {
+        alert('Web Share API not supported in this browser.');
+    }
+});
+
   
-
-
 // Loader animation
 document.addEventListener("DOMContentLoaded", function() {
     const loader = document.getElementById("loader");
@@ -1024,6 +1040,10 @@ function grahGhatitFal(clientTaraResult){
     }
     
 
+    
+    
+    
+
     let nadiVal = 0;
     let nadiFal = "अति शुभ";
 
@@ -1333,9 +1353,3 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
         buttons.forEach(button => button.classList.remove('d-none'));
     }, 1000);
 });
-
-
-
-
-
-

@@ -171,6 +171,7 @@ footer{
     .table-3 tr th{
         font-size: 0.8rem;
     }
+    
 }
 
 .no-page-break {
@@ -230,41 +231,31 @@ img{
 
 /* download pdf  */
 
-
 @media print {
-    /* Hide everything except the content you want to print */
     body * {
         visibility: hidden;
     }
 
-    #content-to-print * {
-        visibility: visible;
-
-    }
-    #grah-melan-chart  * {
+    #content-to-print *, #grah-melan-chart  *, #ghatit-info * {
         visibility: visible;
     }
-    #ghatit-info * {
-        visibility: visible;
-    }
-
-    #content-to-print{
+    
+    /* #content-to-print{
         position: absolute;
         left: 0;
         top: 0;
     }
     #grah-melan-chart{
         position: absolute;
-        left: -10%;
-        top: 100%;
+        left: 0%;
+        top: 120%;
     }
     #ghatit-info{
         position: absolute;
         left: 0;
         top: 200%;
-    }
+    } */
 
-    /* Hide header, footer, and other elements */
     #first-page-content,
     #footer,
     #download-pdf,
@@ -272,7 +263,6 @@ img{
         display: none;
     }
 
-    /* Remove page numbers, date, and time */
     @page {
         margin: 0;
     }
@@ -280,5 +270,6 @@ img{
     button {
         display: none !important;
     }
+
 }
 

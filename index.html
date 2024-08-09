@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vastu - गृह आयादी गणना</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.27/dist/sweetalert2.min.css">
+
+    <!-- Fevicon for different screens -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+    <div id="loader" class="loader-animation">
+        <img class="rounded-circle" loading="lazy" src="images/loader-img.jpg" alt="Loading...">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.27/dist/sweetalert2.all.min.js"></script>
+    <nav class="navbar navbar-expand-lg navbar-light d-none" id="first-page-content">
+        <div class="container">
+            <div>
+                <a class="navbar-brand heading m-0" href="index.html">
+                    <h1 class="text-center px-3 py-2">SIDHANT ASTRO</h1>
+                </a>
+                <div class="date-time d-flex justify-content-evenly m-0 p-0">
+                    <p>Date : <span id="date"></span></p>
+                    <p>Time : <span id="time"></span></p>
+                </div>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="contact-info">
+                <div class="name fw-bold">
+                    <p>Pt. Shri Arun Upadhye</p>
+                </div>
+                <div class="mob"><a href="">Mob. : 9960932477</a></div>
+                <div class="email"><a href="">Email : sidhantastro19@gmail.com</a></div>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <section class="hero p-4 no-page-break d-none" id="content-to-print">
+            <div class="row d-none" id="creater-info">
+                <div class="col-md-6">
+                    <a class="navbar-brand heading" href="index.html">
+                        <h1 class="text-center px-3 py-2">SIDHANT ASTRO</h1>
+                    </a>
+                    <div class="d-flex justify-content-evenly fw-bold">
+                        <p>Date : <span id="date"></span></p>
+                        <p>Time : <span id="time"></span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p class="d-block fw-bold fs-6 mb-0">Pt. Shri Arun Upadhye</p>
+                    <a class="d-block" href="">Mob : 9960932477</a>
+                    <a class="d-block" href="">email : sidhantastro19@gmail.com</a>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center ">
+                <div class="col-lg-3 input-data border p-4">
+                    <form>
+                        <div class="form-group mt-3">
+                            <label for="exampleFormControlInput1">घर मालकाचे नांव :</label>
+                            <input type="text" class="form-control mt-3" id="exampleFormControlInput1" placeholder="Enter Client Name">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="exampleFormControlSelect1">जन्म नक्षत्र</label>
+                            <select class="form-control mt-3" id="janm-nakshatra"></select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="gruh-nakshatra">गृह नक्षत्र</label>
+                            <select class="form-control my-3" id="#" disabled>
+                                <option id="gruh-nakshatra" class="gruh-nakshatra"></option>
+                            </select>
+                        </div>
+                        
+                    </form>
+                    <form onsubmit="calculateArea(event)">
+                        <div class="form-group mt-3 d-flex justify-content-evenly align-items-center">
+                            <label for="length">लांबी :</label>
+                            <input type="text" class="form-control mt-3 w-50" id="length" placeholder="Feet.Inch">
+                        </div>
+                        <div class="form-group mt-3 d-flex justify-content-evenly align-items-center">
+                            <label for="width">रुंदी :</label>
+                            <input type="text" class="form-control mt-3 w-50" id="width" placeholder="Feet.Inch">
+                        </div>
+                        <div class="w-100 mt-3 d-flex justify-content-evenly align-items-center">
+                            <label class="" for="width">क्षेत्रफळ :</label>
+                            <p class="border border-primary px-4 py-2 rounded rounded-4"><span id="area"> 0
+                                </span> Sq.Ft</p>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary rounded-5 mt-3" id="other-button"> Calculate </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-9 ">
+                    <table class="table table-bordered main-table">
+                        <thead>
+                            <tr>
+                                <th colspan="4" class="text-center table-heading">गृह आयादी गणना</th>
+                            </tr>
+                            <tr>
+                                <th scope="col" class="bg-info">वर्ग</th>
+                                <th scope="col" class="bg-info d-none">पिंड</th>
+                                <th scope="col" class="bg-info">वर्ग संख्या</th>
+                                <th scope="col" class="bg-info">आयादी</th>
+                                <th scope="col" class="bg-info">शुभ/अशुभ </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="light-primary-bg">आया</td>
+                                <td id="pind-aaya" class="d-none">0</td>
+                                <td id="varg-aaya">0</td>
+                                <td class="text-success" id="aayadi-aaya"></td>
+                                <td class="" id="shubhashubh-aaya"> </td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">धन</td>
+                                <td id="pind-dhan" class="d-none">0</td>
+                                <td id="varg-dhan">0</td>
+                                <td class="text-success" id="aayadi-dhan"></td>
+                                <td class="" id="shubhashubh-dhan"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">ऋण</td>
+                                <td id="pind-roon" class="d-none">0</td>
+                                <td id="varg-roon">0</td>
+                                <td class="text-success" id="aayadi-roon"></td>
+                                <td class="text-primary" id="shubhashubh-roon"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">वार</td>
+                                <td id="pind-vaar" class="d-none">0</td>
+                                <td id="varg-vaar">0</td>
+                                <td class="text-success" id="aayadi-vaar"></td>
+                                <td class="" id="shubhashubh-vaar"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">तिथी</td>
+                                <td id="pind-tithi" class="d-none">0</td>
+                                <td id="varg-tithi">0</td>
+                                <td class="text-success" id="aayadi-tithi"></td>
+                                <td class="" id="shubhashubh-tithi"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">नक्षत्र</td>
+                                <td id="pind-nakshatra" class="d-none">0</td>
+                                <td id="varg-nakshatra">0</td>
+                                <td class="text-success gruh-nakshatra" id="aayadi-nakshatra"></td>
+                                <td class="" id="shubhashubh-nakshatra"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">योग</td>
+                                <td id="pind-yog" class="d-none">0</td>
+                                <td id="varg-yog">0</td>
+                                <td class="text-success" id="aayadi-yog"></td>
+                                <td class="" id="shubhashubh-yog"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">अंश</td>
+                                <td id="pind-ansh" class="d-none">0</td>
+                                <td id="varg-ansh">0</td>
+                                <td class="text-success" id="aayadi-ansh"></td>
+                                <td class="" id="shubhashubh-ansh"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">आयु</td>
+                                <td id="pind-aayu" class="d-none">0</td>
+                                <td id="varg-aayu">0</td>
+                                <td class="text-success" id="aayadi-aayu">वर्षे</td>
+                                <td class="text-primary" id="shubhashubh-aayu"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered mt-4 table-2">
+                        <thead class="table-dark">
+                            <tr>
+                                <th colspan="4" class="text-center table-heading text-dark">यजमान व गृह घटीत मेलन</th>
+                            </tr>
+                            <tr>
+                                <th scope="col" class="bg-info">घटीत</th>
+                                <th scope="col" class="bg-info">यजमान</th>
+                                <th scope="col" class="bg-info">गृह घटीत</th>
+                                <th scope="col" class="bg-info">फल</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="light-primary-bg">नक्षत्र</td>
+                                <td id="janm-nakshatra-display"></td>
+                                <td class="gruh-nakshatra"></td>
+                                <td class="" id="nakshatra-fal"></td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">नाडी</td>
+                                <td id="nadi"></td>
+                                <td id="grah-nadi"></td>
+                                <td class="" id="nadi-fal">शुभ</td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">तारा</td>
+                                <td id="client-tara">0</td>
+                                <td id="grah-tara">0</td>
+                                <td class="" id="tara-fal">शुभ</td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">राशी</td>
+                                <td id="rashi"></td>
+                                <td id="grah-rashi"></td>
+                                <td class="" id="rashi-fal">शुभ</td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">ग्रह मैत्री</td>
+                                <td id="swami"></td>
+                                <td id="grah-swami"></td>
+                                <td class="" id="grah-fal">शुभ</td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">गण</td>
+                                <td id="gan"></td>
+                                <td id="grah-gan"></td>
+                                <td class="" id="gan-fal">शुभ</td>
+                            </tr>
+                            <tr>
+                                <td class="light-primary-bg">योनि</td>
+                                <td id="yoni"></td>
+                                <td id="grah-yoni"></td>
+                                <td class="" id="yoni-fal">शुभ</td>
+                            </tr>
+                        </tbody>    
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        <button id="download-pdf" class="btn btn-secondary">Download as PDF</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero my-5 p-3 d-none" id="ghatit-info">
+            <div class="container mt-5">
+                <h2 class="mb-4 text-center fw-bold sec2-heading">घटीत मेलन संबंधी खुलासा</h2>
+                <table class="table table-bordered table-striped table-3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>घटीत</th>
+                            <th>खुलासा</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-danger fw-bold text-nowrap pe-3">नक्षत्र</td>
+                            <td>"यजमान नक्षत्रापासून गृह नक्षत्र 3, 5, 7, 12, 14, 16, 21, 23, 25 वा येत असेल तर अशुभ समजावे. तसेच यजमान नक्षत्र व गृह नक्षत्र एक असने सुद्धा अशुभ आहे."</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger fw-bold text-nowrap pe-3">नाडी</td>
+                            <td>नाडी एक येणे अत्यंत शुभ असते, भिन्न नाडी असेल तर दोष नाही.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger fw-bold text-nowrap pe-3">तारा</td>
+                            <td>यजमान नक्षत्रापासून गृह नक्षत्र 3, 5, 7 येत असेल तर अनुक्रमे धनहानी, मानहानी व मृत्यु असे फल येत असलेने अशुभ जाणावे, अन्यता शुभ.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger fw-bold text-nowrap pe-3">राशी</td>
+                            <td>दोघांची राशी एकमेकापासून मृत्यु षडाष्टक, अशुभ नवपंचम, अशुभ द्विर्द्वादशक येत असेल तर अशुभ, अन्यता शुभ जाणावे.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger fw-bold text-nowrap pe-3">ग्रह मैत्री</td>
+                            <td>ग्रहांच्या नैसर्गिक मैत्री चक्रानुसार शुभाशुभ पहावे.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger fw-bold text-nowrap pe-3">गण</td>
+                            <td>मनुष्य गण x राक्षस गण अशुभ, देव गण x राक्षस गण मध्यम व मनुष्य-मनुष्य, देव-देव, मनुष्य-देव शुभ जाणावे.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger fw-bold text-nowrap pe-3">योनि</td>
+                            <td>अश्व-महिष, गज-सिंह, मेष-वानर, सर्प-मुंगुस, श्वान-मृग, मार्जार-मूषक, गौ-व्याघ्र, मृग-श्वान, वानर-मेष हे परस्पर वैरी आहेत. ते येत असतील तर अशुभ समजावे.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  
+        </section>
+    </div>
+    <footer class="d-none" id="footer">
+        <div class="w-100 bg-secondary">
+            <p class="text-light text-center m-0">&copy; 2024 Suprit_Upadhye. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="bootstrap.min.js"></script>
+</body>
+
+</html>
